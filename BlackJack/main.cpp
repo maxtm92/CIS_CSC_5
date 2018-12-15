@@ -45,7 +45,7 @@ int main()
 
     plyGone = false;
     plyCash = 100;
-    int sCash= plyCash;
+    int sCash= plyCash; // use for potential earnings
     do
         {
         int betWrth;      //the worth of the bet that the user chose
@@ -63,20 +63,22 @@ int main()
             //  INPUT -- get the desired amount the user wants to bet.
             cout    <<"You have $"<<plyCash<<". Enter bet:"<<endl;
             cin     >>betWrth;
+            int tst = sCash+betWrth;
+            float test = sCash-betWrth;
+            printNumber (tst);
+            printNumber (test);
         }while(betWrth < 1 || betWrth > plyCash);
 
         //PROCESSING -- Subtracts the user's desired bet amount from their current balance
         plyCash -= betWrth;
+       
 
         //PROCESSING -- calls the function draw_card to determine the player's count.
         for(int i = 0; i < 2; i++){
             string cardNam = "";
             plyCnt += draw_card(cardNam,plyCnt);
             plyCard+=cardNam;
-            int tst = plyCnt;
-            float test = plyCash;
-            printNumber (tst);
-            printNumber (test);
+
         }
 
         //OUTPUT -- Displays the player's cards
@@ -221,7 +223,7 @@ string CARDS[4] = {"Diamonds","Clubs","Heart","Spades"};
     int cardVal = rand()%13;
     int cardSui = rand()%3;
     static int shVal;
-    vector<int> g1;
+
     //Creates a string to display the card name
     card = "   "+CARDV[cardVal]+" of "+CARDS[cardSui]+"\n";
 
@@ -237,27 +239,27 @@ string CARDS[4] = {"Diamonds","Clubs","Heart","Spades"};
     }
     return cardVal+1;
 }
-void BubbleSort(int *a, int siz) //template for the card sorting 
-{                                //works but not with card need to add
+void BubbleSort(int *draw_card, int siz) //sort cards in order low to high
+{                                
 	int i,j,k,temp;
 	for(i = 0; i < siz-1; i++) {
 		for(j=0; j < siz -1; j++) {
-			if(*(a+j) > *(a+j+1)) {
-				temp = *(a+j+1);
-				*(a+j+1) = *(a+j);
-				*(a+j) = temp;
+			if(*(draw_card+j) > *(draw_card+j+1)) {
+				temp = *(draw_card+j+1);
+				*(draw_card+j+1) = *(draw_card+j);
+				*(draw_card+j) = temp;
 			}
 		}
 		for(k = 0; k < siz; k++) 
-		  cout << *(a+k) <<" ";
+		  cout << *(draw_card+k) <<" ";
 	    cout << endl;
 	}
 	int dum = 1;
 }
-void printNumber (int u){//playcount overloading
-    cout<<endl;
+void printNumber (int u){//potential earnings from the bet
+    cout<<"potential winnings: "<<u<<endl;
 };
-void printNumber (float u){//playercash overloading
-    cout<<"";
+void printNumber (float u){//potential earnings from the bet
+    cout<<"potential losings: "<<u<<endl;
 };
 
